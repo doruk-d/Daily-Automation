@@ -1,5 +1,3 @@
-# Daily-Automation
-
 # prodctl
 
 A personal productivity CLI built in Bash.
@@ -15,17 +13,19 @@ Automates daily study routines, logs focus sessions, and generates weekly report
 | `prodctl month` | Generates monthly summary analytics. |
 
 ## Project Structure
+```
 prodctl/
-├── prodctl # main dispatcher
-├── start_day.sh
-├── end_day.sh
-├── mood_tracker.sh
-├── weekly_report.sh
-├── monthly_report.sh
-└── lib/
-      ├── logging.sh
-      ├── utils.sh
-      └── colors.sh
+├── prodctl                   # Main command dispatcher
+├── start_day.sh              # Start of day routine
+├── end_day.sh                # End of day routine
+├── mood_tracker.sh           # Mood tracking functionality
+├── weekly_report.sh          # Weekly summary reports
+├── monthly_report.sh         # Monthly summary reports
+└── lib/                      # Shared library functions
+    ├── logging.sh            # Logging utilities
+    ├── utils.sh              # Common helper functions
+    └── colors.sh             # Terminal color definitions
+```
 
 ## Concepts Learned
 - Bash argument parsing (`$1`, `$2`, `case`)
@@ -35,7 +35,9 @@ prodctl/
 - Automation and self-tracking
 
 ## Usage Example
+```
 prodctl start
-# work...
+work...
 prodctl end
 prodctl week
+```
