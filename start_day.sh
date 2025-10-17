@@ -9,44 +9,22 @@ mode=$(echo "$mode" | tr '[:upper:]' '[:lower:]')
 echo "Choose Focus of the Session"
 read -r topic
 
-if [ "$mode" = "c" ] || [ "$mode" = "py" ]; then
+logfile="$HOME/logs/${timestamp}-logs/${timestamp}-start"
+log_dir="$HOME/logs/${timestamp}-logs"
+drill_dir="$HOME/dev/${mode}-drill"
+code_file="$HOME/dev/${mode}-drill/${topic}-${timestamp}.${mode}"
 
-	if [ ! -d "$HOME/logs/${timestamp}-logs" ]; then
-		mkdir -p "$HOME/logs/${timestamp}-logs"
-	fi
+mkdir -p "$log_dir" "$drill_dir"
+touch "$logfile" 
 
-	if [ ! -d "$HOME/dev/${mode}-drill" ]; then
-		mkdir -p "$HOME/dev/${mode}-drill"
-	fi
-	
-	logfile="$HOME/logs/${timestamp}-logs/${timestamp}-start"
+echo "$timestamp - $topic" >> "$logfile"
+echo "Mode: $mode" >> "$logfile"
 
-	touch "$HOME/dev/${mode}-drill/${topic}-${timestamp}.${mode}"
-	touch "$logfile" 
 
-	echo "$timestamp - $topic" >> "$logfile"
-	echo "Mode: $mode" >> "$logfile"
+([ "$mode" = "c" ] || [ "$mode" = "py" ]) && {
+	touch "$code_file"
 	echo "opening hx..."
+	hx "$code_file"
+} || echo "Good Luck!.."
 
-	if [ -f "$HOME/dev/${mode}-drill/${topic}-${timestamp}.${mode}" ];then
-    		hx "$HOME/dev/${mode}-drill/${topic}-${timestamp}.${mode}"
-	fi
-
-
-else
-	if [ ! -d "$HOME/logs/${timestamp}-logs" ]; then
-                mkdir -p "$HOME/logs/${timestamp}-logs"
-        fi
-
-        if [ ! -d "$HOME/dev/${mode}-drill" ]; then
-                mkdir -p "$HOME/dev/${mode}-drill"
-        fi
-
-	logfile="$HOME/logs/${timestamp}-logs/${timestamp}-start"
-
-	touch "$logfile"
-        echo "$timestamp - $topic" >> "$logfile"
-        echo "Mode: $mode" >> "$logfile"
-        echo "Good Luck!.."
-fi
 
